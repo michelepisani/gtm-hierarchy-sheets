@@ -23,6 +23,11 @@ function getContainers(accounts) {
     // 1. account.accountName (from account)
     // 2. container.name
     // 3. container.publicId (GTM-XXXXX)
+    
+    if (!containerList) {
+      accountsAndContainers.push([ account.name, '', '' ]);
+      return accountsAndContainers;
+    }
     containerList.forEach(function(container) {
       accountsAndContainers.push([
         account.name,
