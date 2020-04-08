@@ -9,13 +9,14 @@ function listContainers(accountId) {
   // API call to list all containers for a give account ID
   return TagManager.Accounts.Containers.list(
     'accounts/' + accountId,
-    {fields: 'container(name,publicId)'}
+    {fields: 'container(name,publicId,containerId)'}
   ).container;
 }
 
 function getContainers(accounts) {
   var accountsAndContainers = [];
   accounts.forEach(function(account) {
+    Utilities.sleep(1000);
     // For each account in the list, fetch containers
     var containerList = listContainers(account.accountId);
     
@@ -30,9 +31,11 @@ function getContainers(accounts) {
     }
     containerList.forEach(function(container) {
       accountsAndContainers.push([
+        account.accountId,
         account.name,
         container.name,
-        container.publicId
+        container.publicId,
+        container.containerId
       ]);
     });
   });
@@ -63,7 +66,7 @@ function buildHeaders(sheet, headers) {
 
 function buildSheet() {
   // Add the headers of the new sheet here in order from left to right
-  var headers = ['Account name', 'Container name', 'Container ID'];
+  var headers = ['Account ID', 'Account name', 'Container name', 'Container Public ID', 'Container ID'];
   
   // Name of the new sheet
   var sheetName = 'GTM Hierarchy';
