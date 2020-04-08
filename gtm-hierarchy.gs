@@ -21,9 +21,11 @@ function getContainers(accounts) {
     var containerList = listContainers(account.accountId);
     
     // For each container, push into accountsAndContainers[] a new array with
-    // 1. account.accountName (from account)
-    // 2. container.name
-    // 3. container.publicId (GTM-XXXXX)
+    // 1. account.id (from account)
+    // 2. account.accountName (from account)
+    // 3. container.name
+    // 4. container.publicId (GTM-XXXXX)
+    // 5. container.containerId
     
     if (!containerList) {
       accountsAndContainers.push([ account.name, '', '' ]);
